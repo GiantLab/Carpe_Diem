@@ -1,5 +1,6 @@
 import sys, datetime, time
-from PyQt5 import QtWidgets, QtCore, uic
+from matplotlib import pyplot as plt
+from PyQt5 import QtWidgets, QtCore, uic, QtTest
 class MeinDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -11,9 +12,9 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.pushButtonExit.clicked.connect(self.exit)
 # functions
 
-        # exit program // open
+        # exit program  
     def exit(self):
-        pass
+        sys.exit()
 
         # shows Date and Time
     def showDateTime(self):
@@ -21,23 +22,22 @@ class MeinDialog(QtWidgets.QDialog):
         y=("Start at: "+x)
         self.ui.listWidgetOutput.addItem(y)
 
-        # timer that counts in the future with various speed // QTimer possibly better solution, dial lagging
+        # timer that counts in the future with various speed 
     def timer(self):
         x=datetime.datetime.now()
         z=x.strftime("%Y")
         self.ui.labelDateTime.setText(z)
         var=x.year
         while True:
-        #prevent while-loop from freezing the program
-            QtCore.QCoreApplication.processEvents()
-            if var==2030:
+            if var==2050:
                 break
             else:
                 var+=1
                 y=x.replace(year=var)
                 z=y.strftime("%Y")
                 self.ui.labelDateTime.setText(z)
-                time.sleep(0.5)
+        #Delay wit QTest
+                QtTest.QTest.qWait(500)
         self.ui.labelDateTime.setText("You are dead")
 
 app = QtWidgets.QApplication(sys.argv)
