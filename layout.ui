@@ -94,7 +94,7 @@
         </property>
         <property name="date">
          <date>
-          <year>1990</year>
+          <year>1980</year>
           <month>1</month>
           <day>1</day>
          </date>
@@ -203,6 +203,9 @@
         </property>
         <property name="text">
          <string>W</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
