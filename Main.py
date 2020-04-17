@@ -17,15 +17,28 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.pushButtonStart.clicked.connect(self.showData)
         self.ui.pushButtonExit.clicked.connect(self.exit)
         self.ui.dialWheel.valueChanged.connect(self.speed)
+        
+#load data in country-widget from list (0 Country both female male )   
+        fhand=open("life_expectancy.txt")
+        for line in fhand:
+            line=line.rstrip()
+            if line.startswith("0") or line=="":
+                continue
+            line=line.split()
+            self.ui.comboBoxCountry.addItem(line[1])
+        self.ui.comboBoxCountry.model().sort(0)
+
 
 # functions
-    
+
         # show data
     def showData(self):
         self.fetchData()
         self.calculateData()
         self.showDateTime()
         self.timer()
+        self.loadCountry()
+
 
         # calculate data
     def calculateData(self):
@@ -107,9 +120,16 @@ class MeinDialog(QtWidgets.QDialog):
         text_final=text+z
         self.ui.labelDateTime.setText(text_final)
 
+        
+
         # exit program  
     def exit(self):
         sys.exit()
+
+
+    
+
+    
 
 # testing output
 #print(input_gender)

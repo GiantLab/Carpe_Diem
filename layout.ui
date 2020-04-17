@@ -174,21 +174,6 @@
           <bold>false</bold>
          </font>
         </property>
-        <item>
-         <property name="text">
-          <string>Germany</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Italy</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Spain</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item row="4" column="1">
