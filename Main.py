@@ -33,7 +33,7 @@ class MeinDialog(QtWidgets.QDialog):
                 continue
             line=line.split()
             self.ui.comboBoxCountry.addItem(line[1])
-        self.ui.comboBoxCountry.model().sort(0)
+        self.ui.comboBoxCountry.model().sort(0)   
 
 
 # functions
