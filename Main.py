@@ -36,7 +36,7 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.comboBoxCountry.model().sort(0)
 
 
-# functions 
+# functions
 
         # show data
     def showData(self):
