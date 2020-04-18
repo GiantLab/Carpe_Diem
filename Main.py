@@ -25,7 +25,7 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.spinBox_6.valueChanged.connect(self.labelPercentage)
         self.ui.spinBox_7.valueChanged.connect(self.labelPercentage)
 
-#load data in country-widget from list (0 Country both female male )   
+#load data in country-widget from list (0 Country both female male )       
         fhand=open("life_expectancy.txt")
         for line in fhand:
             line=line.rstrip()
