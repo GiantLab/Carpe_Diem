@@ -17,7 +17,14 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.pushButtonStart.clicked.connect(self.showData)
         self.ui.pushButtonExit.clicked.connect(self.exit)
         self.ui.dialWheel.valueChanged.connect(self.speed)
-        
+        self.ui.spinBox_1.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_2.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_3.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_4.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_5.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_6.valueChanged.connect(self.labelPercentage)
+        self.ui.spinBox_7.valueChanged.connect(self.labelPercentage)
+
 #load data in country-widget from list (0 Country both female male )   
         fhand=open("life_expectancy.txt")
         for line in fhand:
@@ -37,8 +44,63 @@ class MeinDialog(QtWidgets.QDialog):
         self.calculateData()
         self.showDateTime()
         self.timer()
-        self.loadCountry()
+        self.labelPercentage()
 
+        # check if percentage 100% and comment status in label SystemWaiting funny way // to do
+    def labelPercentage(self):
+        self.ui.spinBoxes=[self.ui.spinBox_1,self.ui.spinBox_2,self.ui.spinBox_3, \
+        self.ui.spinBox_4,self.ui.spinBox_5,self.ui.spinBox_6,self.ui.spinBox_7]
+        total=0
+        for i in self.ui.spinBoxes:
+            total+=i.value()
+        self.ui.lcdNumber.display(total)
+
+        # system reaction on user input percentage
+        if total <= 5:
+            self.ui.labelSystemWaiting.setText("Come on, give me more")
+        if total > 5 and total <=10:
+            self.ui.labelSystemWaiting.setText("Yes, you can")
+        if total > 10 and total <=15:
+            self.ui.labelSystemWaiting.setText("A few more please")
+        if total > 15 and total <=20:
+            self.ui.labelSystemWaiting.setText("Really ?")
+        if total > 20 and total <=25:
+            self.ui.labelSystemWaiting.setText("I get tired")
+        if total > 25 and total <=30:
+            self.ui.labelSystemWaiting.setText("Time waste")
+        if total > 30 and total <=35:
+            self.ui.labelSystemWaiting.setText("The sky is blue")
+        if total > 35 and total <=40:
+            self.ui.labelSystemWaiting.setText("I want to be drunk")
+        if total > 40 and total <=45:
+            self.ui.labelSystemWaiting.setText("Are you sleeping ?")
+        if total > 45 and total <=50:
+            self.ui.labelSystemWaiting.setText("Oh my god")
+        if total > 50 and total <=55:
+            self.ui.labelSystemWaiting.setText("You are a rocket")
+        if total > 55 and total <=60:
+            self.ui.labelSystemWaiting.setText("Developers !")  
+        if total > 60 and total <=65:
+            self.ui.labelSystemWaiting.setText("Winter is coming")
+        if total > 65 and total <=70:
+            self.ui.labelSystemWaiting.setText("turbocharged")
+        if total > 70 and total <=75:
+            self.ui.labelSystemWaiting.setText("Go Go Go")
+        if total > 75 and total <=80:
+            self.ui.labelSystemWaiting.setText("My grandma could do this")
+        if total > 80 and total <=80:
+            self.ui.labelSystemWaiting.setText("You are fired")
+        if total > 85 and total <=80:
+            self.ui.labelSystemWaiting.setText("Just joking")
+        if total > 90 and total <=80:
+            self.ui.labelSystemWaiting.setText("Hmmmm")
+        if total > 95 and total <=99:
+            self.ui.labelSystemWaiting.setText("Love me, love my dog")
+        if total ==100:
+            self.ui.labelSystemWaiting.setText("You did it !!")
+        if total > 100:
+            self.ui.labelSystemWaiting.setText("System crashed")
+            self.ui.lcdNumber.display("00000")
 
         # calculate data
     def calculateData(self):
@@ -51,19 +113,19 @@ class MeinDialog(QtWidgets.QDialog):
         year_now=x.strftime("%Y")
         year_now=int(year_now)
 
-        #female
+        #female // calculate later
         if input_gender==0: 
-            life_expectancy=input_year + 85 # // calculate later 
-        #male
+            life_expectancy=input_year + 85 
+        #male // calculate later
         else:               
-            life_expectancy=input_year + 80 # // calculate later
+            life_expectancy=input_year + 80 
 
         # fetch data      
     def fetchData(self):
         global input_year
         global input_gender
         
-        # fetch year of date of birth
+        # fetch date of birth (year)
         input_year=self.ui.dateEditDateBirth.date().year()
         input_year=int(input_year)
 

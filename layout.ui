@@ -283,6 +283,9 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
        </widget>
       </item>
       <item row="2" column="0">
@@ -355,6 +358,9 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
         </property>
        </widget>
       </item>
@@ -435,6 +441,9 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -487,6 +496,9 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
        </widget>
       </item>
       <item row="4" column="2">
@@ -503,6 +515,9 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
        </widget>
       </item>
       <item row="3" column="2">
@@ -518,6 +533,9 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
         </property>
        </widget>
       </item>
@@ -584,6 +602,9 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
         </property>
        </widget>
       </item>
