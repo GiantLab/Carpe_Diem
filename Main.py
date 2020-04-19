@@ -7,6 +7,8 @@ dial_speed=1
 input_year=int()
 input_gender=int()
 life_expectancy=int()
+# this is the year the timer shows at the moment
+year_display=int()
 
 class MeinDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -25,6 +27,10 @@ class MeinDialog(QtWidgets.QDialog):
         self.ui.spinBox_6.valueChanged.connect(self.labelPercentage)
         self.ui.spinBox_7.valueChanged.connect(self.labelPercentage)
 
+
+
+
+
 #load data in country-widget from list (0 Country both female male )       
         fhand=open("life_expectancy.txt")
         for line in fhand:
@@ -38,6 +44,8 @@ class MeinDialog(QtWidgets.QDialog):
 
 # functions
 
+
+
         # show data
     def showData(self):
         self.fetchData()
@@ -46,7 +54,8 @@ class MeinDialog(QtWidgets.QDialog):
         self.timer()
         self.labelPercentage()
 
-        # check if percentage 100% and comment status in label SystemWaiting funny way // to do
+
+        # check if percentage 100% and comment status in label SystemWaiting funny way 
     def labelPercentage(self):
         self.ui.spinBoxes=[self.ui.spinBox_1,self.ui.spinBox_2,self.ui.spinBox_3, \
         self.ui.spinBox_4,self.ui.spinBox_5,self.ui.spinBox_6,self.ui.spinBox_7]
@@ -154,7 +163,13 @@ class MeinDialog(QtWidgets.QDialog):
     def timer(self):
         global dial_speed
         global life_expectancy
-        #dial from 1-100 (key) => speed QTest: 5000 - 50 (value) via dictionary
+        global year_display
+        # helping variable to calculate progress bar def: year display at the moment as int
+        global xdisplay_int
+        # helping variable to calculate progress bar def: year started as int
+        global xstart_int
+
+        # dial from 1-100 (key) => speed QTest: 5000 - 50 (value) via dictionary
         dic_speed={}
         x= range(1,101,1)
         xkey=1000
@@ -163,33 +178,49 @@ class MeinDialog(QtWidgets.QDialog):
             xkey-=10
 
         x=datetime.datetime.now()
-        z=x.strftime("%Y")
-        self.ui.labelDateTime.setText(z)
+        year_display=x.strftime("%Y")
+
+        xstart_int=year_display
+        xstart_int=int(xstart_int)
+
+        self.ui.labelDateTime.setText(year_display)
         var=x.year
         while True:
+
             if var==life_expectancy:
                 break
             else:
+                
                 var+=1
                 y=x.replace(year=var)
-                z=y.strftime("%Y")
-                self.ui.labelDateTime.setText(z)
-        #combine QTest and dictionary 
+                year_display=y.strftime("%Y")
+
+                xdisplay_int=year_display
+                xdisplay_int=int(xdisplay_int)
+                
+                self.progressBarDef()
+                self.ui.labelDateTime.setText(year_display)
+        # combine QTest and dictionary 
                 d=dic_speed[dial_speed]
                 QtTest.QTest.qWait(d)
         text="life expectancy was: "
-        z=str(life_expectancy)
-        text_final=text+z
+        year_display=str(life_expectancy)
+        text_final=text+year_display
         self.ui.labelDateTime.setText(text_final)
 
-        
+        # set value progressBar dependece on year display
+    def progressBarDef(self):
+        global value_progressBar
+
+        # set value progressBar dependece on year display 
+        value_progressBar=((xdisplay_int-xstart_int)/(life_expectancy-xstart_int))*100
+        value_progressBar=int(value_progressBar)
+        self.ui.progressBar.setValue(value_progressBar)
 
         # exit program  
     def exit(self):
         sys.exit()
 
-
-    
 
     
 
